@@ -1,0 +1,48 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias sudo='sudo -v; sudo '
+alias reboot='sudo reboot'
+alias shutdown='sudo shutdown now'
+alias p='sudo pacman -S'
+alias g='git'
+alias ga='git add'
+alias ga.='git add .'
+alias gb='git branch'
+alias gs='git status'
+alias gch='git checkout'
+alias gc='git clone'
+alias push='git push -u origin master'
+alias ll='ls -lh'
+alias la='ls -ahl'
+alias ytdl='yt-dlp'
+alias update='sudo pacman -Syu'
+alias bashedit='vim /home/jerkob/.bashrc'
+alias vpn='piactl login ~/Documents/vpncred'
+alias hostsedit='vim /etc/hosts'
+alias escaps='setxkbmap -option caps:escape'
+shopt -s autocd
+
+function gcg(){ git clone "https://github.com/$1"; }
+export -f gcg
+
+function gcm(){ git commit -m "$1"; }
+export -f gcm
+
+function add-origin(){ git remote add origin "https://github.com/username/$1"; }
+export -f add-origin
+function lang(){ setxkbdmap $1; }
+export -f lang
+
+function yolo() {
+    ga.;
+    gcm yolo;
+    push
+}
+
+export PS1="\[\033[38;5;39m\][\[$(tput sgr0)\]\[\033[38;5;214m\]\u\[$(tput sgr0)\]\[\033[38;5;69m\]@\h\[$(tput sgr0)\] \[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;47m\]\W\[$(tput sgr0)\]\[\033[38;5;39m\]]\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;214m\]\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\[$(tput sgr0)\] \[$(tput sgr0)\]\[\033[38;5;215m\]>\[$(tput sgr0)\] \[$(tput sgr0)\]"
